@@ -8,7 +8,13 @@ pipeline{
     stages{
         stage('Build'){
             steps {
-                sh 'mvn install -e'
+                sh 'mvn install -e -DskipTests=true'
+            }
+        }
+
+        stage('Sample'){
+            steps{
+                echo 'This is stage 2'
             }
         }
     }
