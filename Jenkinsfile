@@ -33,7 +33,7 @@ pipeline{
         stage('Build java'){
             agent{
                 docker{
-                    image 'openjdk:9-jre'
+                    image 'openjdk:8-jre'
                 }
             }
 
