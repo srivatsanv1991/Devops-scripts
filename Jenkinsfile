@@ -13,7 +13,7 @@ pipeline{
         }
 
         stage('Sample'){
-            
+
             steps{
                 echo 'This is stage 2'
             }
@@ -24,5 +24,4 @@ pipeline{
             }
             }
         }
-    }
 }
