@@ -20,6 +20,7 @@ pipeline{
             steps{
                 sh 'mvn -B'
             }
+            }
         }
     }
 }
