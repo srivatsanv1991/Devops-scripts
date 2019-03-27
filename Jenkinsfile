@@ -29,5 +29,17 @@ pipeline{
                 sh 'node --version'
             }
         }
+
+        stage('Build java'){
+            agent{
+                docker{
+                    image 'openjdk:9-jre'
+                }
+            }
+
+            steps{
+                sh 'java -version'
+            }
+        }
         }
 }
