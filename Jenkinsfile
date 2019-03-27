@@ -16,6 +16,10 @@ pipeline{
             steps{
                 echo 'This is stage 2'
             }
+            stage('Build2'){
+            steps{
+                sh 'mvn -B'
+            }
         }
     }
 }
