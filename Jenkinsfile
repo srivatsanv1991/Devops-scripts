@@ -1,4 +1,5 @@
 pipeline{
+    def server = Artifactory.newServer url: 'http://localhost:8081/artifactory', username: 'jenkinsuser', password: 'password123'
     agent none
     stages{
         stage('Build'){
@@ -41,32 +42,14 @@ pipeline{
                 sh 'java -version'
             }
         }
-
-            rtServer (
-    id: "Artifactory-1",
-    url: "http://localhost:8081/artifactory",
-    // If you're using username and password:
-    username: "jenkinsuser",
-    password: "password123",
-    // If you're using Credentials ID:
-    
-    // If Jenkins is configured to use an http proxy, you can bypass the proxy when using this Artifactory server:
-    // Configure the connection timeout (in seconds).
-    // The default value (if not configured) is 300 seconds:
-    timeout = 3000
-)
-rtUpload (
-    serverId: "Artifactory-1",
-    spec:
-        """{
-          "files": [
-            {
-              "pattern": "target/*.jar",
-              "target": "libs-release/myJavaProject/"
-            }
-         ]
-        }"""
-)
-
+def uploadSpec = """{
+  "files": [
+    {
+      "pattern": "target/*.jar",
+      "target": "libs-release-local/MyTestApp/"
+    }
+ ]
+}"""
+server.upload(uploadSpec)
         }
 }
