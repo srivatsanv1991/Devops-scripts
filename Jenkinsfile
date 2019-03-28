@@ -42,8 +42,6 @@ pipeline{
             }
         }
 
-        stage('public to jfrog'){
-            agent any
             rtServer (
     id: "Artifactory-1",
     url: "http://localhost:8081/artifactory",
@@ -70,6 +68,5 @@ rtUpload (
         }"""
 )
 
-        }
         }
 }
