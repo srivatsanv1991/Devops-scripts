@@ -1,5 +1,5 @@
 pipeline{
-    def server = Artifactory.newServer url: 'http://localhost:8081/artifactory', username: 'jenkinsuser', password: 'password123'
+    
     agent none
     stages{
         stage('Build'){
@@ -42,14 +42,24 @@ pipeline{
                 sh 'java -version'
             }
         }
-def uploadSpec = """{
+        stage('upload artifacts to jfrog'){
+            steps{
+                scripts{
+                    def server = Artifactory.newServer 'http://localhost:8081/artifactory'
+                    server.username='jenkinsuser'
+                    server.password='password123'
+                    def uploadSpec = """{
   "files": [
     {
       "pattern": "target/*.jar",
-      "target": "libs-release-local/MyTestApp/"
+      "target": "libs-release-local/MyTestApp/test.jar"
     }
  ]
 }"""
 server.upload(uploadSpec)
+                }
+            }
+        }
+
         }
 }
