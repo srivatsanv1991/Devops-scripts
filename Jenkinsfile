@@ -46,9 +46,7 @@ pipeline{
             agent any
             steps{
                 script {
-                    def server = Artifactory.newServer 'http://localhost:8081/artifactory'
-                    server.username='jenkinsuser'
-                    server.password='password123'
+                    def server = Artifactory.newServer url: 'https://localhost:8081/artifactory/', username: 'jenkinsuser', password: 'password123'
                     def uploadSpec = """{
   "files": [
     {
