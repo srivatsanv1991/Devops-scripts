@@ -43,8 +43,9 @@ pipeline{
             }
         }
         stage('upload artifacts to jfrog'){
+            agent any
             steps{
-                scripts{
+                script {
                     def server = Artifactory.newServer 'http://localhost:8081/artifactory'
                     server.username='jenkinsuser'
                     server.password='password123'
