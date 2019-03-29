@@ -51,7 +51,7 @@ pipeline{
   "files": [
     {
       "pattern": "target/*.jar",
-      "target": "libs-release-local/MyTestApp/test.jar"
+      "target": "libs-release/MyTestApp/test.jar"
     }
  ]
 }"""
