@@ -6,11 +6,12 @@ pipeline{
             agent {
                 docker {
                     image 'maven:3-alpine'
-                    args '-v /maven-repo:/root/.m2'
+                    args '-v $HOME/.m2:/root/.m2:z -u root'
+                    reuseNode true
                 }
             }
             steps {
-                sh 'mvn install -e -DskipTests=true -o'
+                sh 'mvn install -e -DskipTests=true'
             }
         }
 
