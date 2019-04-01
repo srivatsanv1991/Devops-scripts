@@ -10,7 +10,7 @@ pipeline{
                 }
             }
             steps {
-                sh 'mvn install -e -DskipTests=true'
+                sh 'mvn install -e -DskipTests=true -o'
             }
         }
 
