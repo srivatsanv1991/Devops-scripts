@@ -1,15 +1,8 @@
 pipeline{
     
-    agent none
+    agent any
     stages{
         stage('Build'){
-            agent {
-                docker {
-                    image 'maven:3-alpine'
-                    args '-v "$HOME"/.m2:/root/.m2'
-                    reuseNode true
-                }
-            }
             steps {
                 sh 'mvn install -e -DskipTests=true'
             }
@@ -21,33 +14,12 @@ pipeline{
             }
         }
 
-        stage('Build node'){
-            agent{
-                docker{
-                    image 'node:7-alpine'
-                }
-            }
-            steps {
-                sh 'node --version'
-            }
-        }
-
-        stage('Build java'){
-            agent{
-                docker{
-                    image 'openjdk:8-jre'
-                }
-            }
-
-            steps{
-                sh 'java -version'
-            }
-        }
+        
         stage('upload artifacts to jfrog'){
             agent any
             steps{
                 script {
-                    def server = Artifactory.newServer url: 'http://172.17.0.3:8081/artifactory/', username: 'jenkinsuser', password: 'password123'
+                    def server = Artifactory.newServer url: 'http://localhost:8081/artifactory/', username: 'jenkinsuser', password: 'password123'
                     def uploadSpec = """{
   "files": [
     {
