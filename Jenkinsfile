@@ -1,6 +1,6 @@
 pipeline{
     
-    agent any
+    agent TestJavaWebStart Agent
     stages{
         stage('Build'){
             steps {
@@ -16,7 +16,6 @@ pipeline{
 
         
         stage('upload artifacts to jfrog'){
-            agent any
             steps{
                 script {
                     def server = Artifactory.newServer url: 'http://localhost:8081/artifactory/', username: 'jenkinsuser', password: 'password123'
