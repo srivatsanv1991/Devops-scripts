@@ -1,6 +1,6 @@
 pipeline{
     
-    agent TestJavaWebStart Agent
+    agent { label 'MacBuilder' }
     stages{
         stage('Build'){
             steps {
